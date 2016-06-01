@@ -3,7 +3,7 @@
 #----------------------------------------------------------------
 # Version number
 #----------------------------------------------------------------
-our $version = "1.1.35"; 
+our $version = "1.1.36"; 
 
 #----------------------------------------------------------------
 # Short documentation
@@ -2815,11 +2815,6 @@ sub filter_out_accents {
 
 
   # First do everything that translates into a single character:
-
-  if (0) {
-    # Wrong: tr goes byte by byte, so this gave wrong results on, e.g., lowercase lambda:
-    $x =~ tr/\x{c2}\x{c4}\x{ce}\x{d6}\x{da}\x{dc}\x{df}\x{e0}\x{e1}\x{e2}\x{e4}\x{e9}\x{ed}\x{ee}\x{f1}\x{f3}\x{f6}\x{fa}\x{fb}\x{fc}\x{fd}\x{2011}\x{105}\x{103}\x{102}\x{107}\x{10d}\x{10c}\x{11b}\x{119}\x{142}\x{144}\x{159}\x{158}\x{15b}\x{219}\x{218}\x{21b}\x{21a}\x{17a}\x{391}\x{3b1}\x{3ac}\x{392}\x{3b2}\x{393}\x{3b3}\x{394}\x{3b4}\x{395}\x{3b5}\x{3ad}\x{396}\x{3b6}\x{397}\x{3b7}\x{3ae}\x{399}\x{3b9}\x{3af}\x{39a}\x{3ba}\x{39b}\x{3bb}\x{39c}\x{3bc}\x{39d}\x{3bd}\x{39f}\x{3bf}\x{3cc}\x{3a0}\x{3c0}\x{3a1}\x{3c1}\x{3a3}\x{3c3}\x{3c2}\x{3a4}\x{3c4}\x{3a5}\x{3c5}\x{3cd}\x{3a6}\x{3c6}\x{3a7}\x{3c7}\x{3a9}\x{3c9}\x{3ce}/AAIOUUsaaaaeiinoouuuy-aaAccCeelnrrssStTzAaaBbggDdEeeZzHnnIiiKkLlMmNvOooPpRrSssTtYuuFfXxWww/;
-  }
 
   my @t = (
     ["\x{c2}",'A'],["\x{c4}",'A'],["\x{ce}",'I'],["\x{d6}",'O'],["\x{da}",'U'],
