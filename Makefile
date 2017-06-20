@@ -4,7 +4,7 @@
 #    Update version numbers on web page (no longer made from .source file).
 #    make install (so make test will run the right version)
 #    make test
-#    make debian (see password file for password)
+#    make debian (see password file for password, is not one I use for anything else)
 #    make post
 #    git: commit and push
 # Updating manpage doesn't work right, for reasons I don't understand. M4 seems to remember

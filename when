@@ -3,7 +3,7 @@
 #----------------------------------------------------------------
 # Version number
 #----------------------------------------------------------------
-our $version = "1.1.36"; 
+our $version = "1.1.37"; 
 
 #----------------------------------------------------------------
 # Short documentation
@@ -163,7 +163,7 @@ Maximum number of columns of text for the output (or -1 if you don't want
 any maximum). Useful in combination with --wrap_auto to preserve legibility
 on very large terminal windows. Default: -1
 
-=item --rows=COLUMNS
+=item --rows=ROWS
 
 Number of rows of text that will fit in the terminal window.
 When listing your calendar, output will be truncated to this
@@ -171,7 +171,8 @@ length, unless that would result in listing less than three days
 into the future. This behavior is overridden (the maximum number
 of rows is set to infinity) if the --future option is given
 explicitly, or if the m or y command is
-used.
+used. To make this option have an effect, you will normally need
+to use --norows_auto as well.
 Default: 40
 
 =item --[no]rows_auto
@@ -746,6 +747,7 @@ our %command_line_options = (
   'wrap=i'=>\$preferences{'wrap'},
   'wrap_auto!'=>\$preferences{'wrap_auto'},
   'wrap_max=i'=>\$preferences{'wrap_max'},
+  'rows=i'=>\$preferences{'rows'},
   'rows_auto!'=>\$preferences{'rows_auto'},
   'paging!'=>\$preferences{'paging'},
   'header!'=>\$preferences{'header'},
