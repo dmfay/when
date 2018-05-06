@@ -5,6 +5,7 @@
 #    make install (so make test will run the right version)
 #    make test
 #    make debian (see password file for password, is not one I use for anything else)
+#            ...this fails as of 2018 may 6, apparently because of incompatibility between versions of gpg
 #    make post
 #    git: commit and push
 # Updating manpage doesn't work right, for reasons I don't understand. M4 seems to remember
@@ -75,9 +76,10 @@ clean:
 
 post: when.tar.gz when when.1
 	cp when.tar.gz $(HOME)/Lightandmatter/when
-	cp when_$(VERSION)-debian-source.tar.gz $(HOME)/Lightandmatter/when
-	cp when_$(VERSION)-*_all.deb $(HOME)/Lightandmatter/when
 	make_plain_text_manpage.pl >$(HOME)/Documents/web/source/when/manpage.txt
+	# debian stuff fails as of 2018 may 6:
+	#cp when_$(VERSION)-debian-source.tar.gz $(HOME)/Lightandmatter/when
+	#cp when_$(VERSION)-*_all.deb $(HOME)/Lightandmatter/when
 
 when.1: when
 	pod2man --section=1 --center="When $(VERSION)" --release="$(VERSION)" \
@@ -89,7 +91,7 @@ debian: when.1
 	mkdir $(DEB_SCRATCH)
 	cp $(FILES) $(DEB_SCRATCH)
 	tar -zcf $(DEB_TARBALL) $(DEB_SCRATCH)
-	-cd $(DEB_SCRATCH) && export DEBFULLNAME='$(MAINTAINER_NAME)' && dh_make -e "$(MAINTAINER_EMAIL)" -s -copyright GPL -f ../$(DEB_TARBALL)
+	-cd $(DEB_SCRATCH) && export DEBFULLNAME='$(MAINTAINER_NAME)' && dh_make -e "$(MAINTAINER_EMAIL)" -s --copyright gpl -f ../$(DEB_TARBALL)
 	cp debian_stuff/* $(DEB_SCRATCH)/debian
 	cd $(DEB_SCRATCH)/debian && ls && rm *.ex *.EX README.Debian
 	cd $(DEB_SCRATCH) && dpkg-buildpackage -rfakeroot

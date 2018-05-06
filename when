@@ -3,7 +3,7 @@
 #----------------------------------------------------------------
 # Version number
 #----------------------------------------------------------------
-our $version = "1.1.37"; 
+our $version = "1.1.38"; 
 
 #----------------------------------------------------------------
 # Short documentation
@@ -410,6 +410,11 @@ If you want a reminder of both the holiday and the day you get off from work, he
 
 	* jul 4 , Independence Day
 	m=jul & c=4 , Independence Day (observed as a federal holiday)
+
+=head1 COMMENTS
+
+A line beginning with the # character is taken as a comment, and is ignored.
+A line consisting only of whitespace characters is also ignored.
 
 =head1 INTERNATIONALIZATION
 
@@ -1786,7 +1791,7 @@ sub normal_behavior {
         }
       } # end if not ignored
     } # end if line has the syntax of a calendar entry
-    else {
+    else { # Ignore lines consisting only of whitespace and lines that begin with # (comments).
       if (!($line =~ m/^\s*$/ || $line =~ m/^#/)) {die w('syntax_error_in_calendar',$line)}
     }
   }
