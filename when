@@ -1355,7 +1355,7 @@ sub w {
         'illegal_command'=>"Comando ilegal, %s\n",
         'error_opening_calendar'=>"Não foi possível abrir o arquivo %s para entrada",
         'error_prefiltering'=>"Não foi possível executar o pré filtro %s\n",
-        'not_utf8'=>"O arquivo %s não parece estar codificado em utf8 (ou ascii, que é um subconjunto do utf8). O utilitário unix, 'file', pode provavelmente dizer o que está coficando isso.\n ",
+        'not_utf8'=>"O arquivo %s não parece estar codificado em utf8 (ou ascii, que é um subconjunto do utf8). O utilitário unix, 'file', pode provavelmente dizer o que está codificando isso.\n ",
         'yesterday'=>'ontem',
         'today'=>'hoje',
         'tomorrow'=>'amanhã',
