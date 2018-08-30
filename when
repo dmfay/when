@@ -3,7 +3,7 @@
 #----------------------------------------------------------------
 # Version number
 #----------------------------------------------------------------
-our $version = "1.1.38"; 
+our $version = "1.1.39"; 
 
 #----------------------------------------------------------------
 # Short documentation
@@ -419,7 +419,7 @@ A line consisting only of whitespace characters is also ignored.
 =head1 INTERNATIONALIZATION
 
 B<When> has at least partial support for Czech, Danish, Dutch,
-English, French, German, Greek, Hungarian, Italian, Polish, Romanian, Spanish, and Ukrainian.
+English, French, German, Greek, Hungarian, Italian, Polish, Romanian, Spanish, Ukrainian and Portuguese.
 If B<When> has not been translated into your language,
 or has only been partially translated, the text that hasn't been translated 
 will be displayed in English.
@@ -889,6 +889,7 @@ our %month_name =
    'el'=>'Ιαν Φεβ Μαρ Απρ Μάι Ιούν Ιούλ Αύγ Σεπ Οκτ Νοέ Δεκ', # Greek
    'ro'=>'ian feb mar apr mai iun iul aug sep oct noi dec', # Romanian
    'uk'=>'Січ Лют Бер Кві Тра Чер Лип Сер Вер Жов Лис Гру', # Ukrainian
+   'pt'=>'Jan Fev Mar Abr Mai Jun Jul Ago Set Out Nov Dez', #Portuguese
   );
 our %month_name_long =
   (
@@ -920,6 +921,8 @@ our %month_name_long =
     'ro'=>'ianuarie februarie martie aprilie mai iunie iulie august septembrie octombrie noiembrie decembrie',
     # Ukrainian
     'uk'=>'Січень Лютий Березень Квітень Травень Червень Липень Серпень Вересень Жовтень Листопад Грудень',
+    #Portuguese
+    'pt'=>'Janeiro Fevereiro Março Abril Maio Junho Julho Agosto Setembro Outubro Novembro Dezembro',
   );
 our %wday_name = 
   (
@@ -937,6 +940,7 @@ our %wday_name =
     'el'=>'Κυρ Δευ Τρί Τετ Πέμ Παρ Σάβ', # Greek
     'ro'=>'du lu ma mi jo vi sb', # Romanian
     'uk'=>'Нд Пн Вт Ср Чт Пт Сб', # Ukrainian
+    'pt'=>'Dom Seg Ter Qua Qui Sex Sab', #Portuguese
   );
 
 #------------------------------------------------------------------------
@@ -1340,6 +1344,42 @@ sub w {
         'expression_syntax_error'=>'синтаксична помилка: %s',
         'error_running_editor'=>"Помилка при виконанні команди %s, %s. Можливо %s не встановлено?\nВи обрали цю команду у файлі %s.\n",
         'describe_julian_day'=>"Дата %s відповідає модифікованому юліанському дню %d.\n",
+      )
+    }	elsif ($lingo eq 'pt') { #Portuguese
+        %strings =
+      (
+        'date_syntax_error'=>"A data %s não está no formato requerido, que é 'y m d', com espaços em branco separando as três partes.",
+        'error_opening_prefs'=>"O arquivo de preferências %s existe, mas houve um erro ao abri-lo para entrada.",
+        'syntax_err_in_prefs'=>"Erros de sintaxe no arquivo de preferências %s: \n%s",
+        'prefs_file_not_found'=>"O arquivo de preferências %s não foi encontrado",
+        'illegal_command'=>"Comando ilegal, %s\n",
+        'error_opening_calendar'=>"Não foi possível abrir o arquivo %s para entrada",
+        'error_prefiltering'=>"Não foi possível executar o pré filtro %s\n",
+        'not_utf8'=>"O arquivo %s não parece estar codificado em utf8 (ou ascii, que é um subconjunto do utf8). O utilitário unix, 'file', pode provavelmente dizer o que está coficando isso.\n ",
+        'yesterday'=>'ontem',
+        'today'=>'hoje',
+        'tomorrow'=>'amanhã',
+        'syntax_error_in_calendar'=>"Erro de sintaxe no calendário: %s\n",
+        'illegal_year'=>"Ano ilegal: %s\n",
+        'illegal_month'=>"Mês ilegal: %s\n",
+        'illegal_day_of_month'=>"Dia do mês ilegal: %s\n",
+        'first_time_not_tty'=>"Para configurar seu calendário, use o comando ``when'' em uma janela interativa de terminal.\n",
+        'ask_if_set_up'=>("Você pode agora configurar seu calendário. Isso envolve criar um diretório ~/.when, e fazendo\n".
+                                  "alguns arquivos nele. Se você quer fazer isso, digite y e aperte return"),
+        'error_creating_dir'=>"Erro ao criar o arquivo %s",
+        'ask_for_editor'=>("Você pode editar seu arquivo de calendário usando seu editor favorito. Por favor, entre com o comando que você\n"
+                                  ."quer usar para executar seu editor, ou aperte return para aceitar o padrão:\n"),
+        'error_creating_prefs'=>"Erro ao criar o arquivo %s\n",
+        'error_creating_cal'=>"Erro ao criar o arquivo %s\n",
+        'getting_started'=>("Agora você pode adicionar itens para seu arquivo de calendário. Faça ``when --help'' para mais informações.\n"),
+        'not_unique_w_match'=>'%s não corresponde um único dia da semana de %s',
+        'no_w_match'=>'%s não corresponde com nenhum dia da semana de %s',
+        'not_valid_expression'=>'%s não é uma data ou expressão válida',
+        'illegal_var'=>'variável ilegal: %s',
+        'illegal_month_in_expression'=>'mês ilegal na expressão: %s',
+        'expression_syntax_error'=>'erro de sintaxe: %s',
+        'error_running_editor'=>"Erro ao executar comando %s, %s. Talvez %s não esteja instalado?\nVocê selecionou esse comando no arquivo %s.\n",
+        'describe_julian_day'=>"A data %s corresponde ao sua data juliana modificada %d.\n",
       )
     } else { # default to English
          %strings = 
