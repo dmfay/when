@@ -867,6 +867,10 @@ our $quotalt_open = "\x{ab}" ;
 our $quotalt_close = "\x{bb}" ;
 our $nonbreaking_hyphen = "\x{2011}" ;
 
+# Portuguese characters:
+our $a_tilde = "\x{e3}";
+our $c_circumflex = "\x{e7}";
+our $e_circumflex = "\x{f5}";
 
 #**********************************************************************
 # When adding a language, make sure to update the list of languages
@@ -2866,8 +2870,9 @@ sub filter_out_accents {
   my @t = (
     ["\x{c2}",'A'],["\x{c4}",'A'],["\x{ce}",'I'],["\x{d6}",'O'],["\x{da}",'U'],
     ["\x{dc}",'U'],["\x{df}",'s'],["\x{e0}",'a'],["\x{e1}",'a'],["\x{e2}",'a'],
-    ["\x{e4}",'a'],["\x{e9}",'e'],["\x{ea}",'e'],["\x{ed}",'i'],["\x{ee}",'i'],["\x{f1}",'n'],
-    ["\x{f3}",'o'],["\x{f6}",'o'],["\x{fa}",'u'],["\x{fb}",'u'],["\x{fc}",'u'],
+    ["\x{e4}",'a'],["\x{e3}",'a'],["\x{e7}",'c'],
+    ["\x{e9}",'e'],["\x{ea}",'e'],["\x{ed}",'i'],["\x{ee}",'i'],["\x{f1}",'n'],
+    ["\x{f3}",'o'],["\x{f5}",'e'],["\x{f6}",'o'],["\x{fa}",'u'],["\x{fb}",'u'],["\x{fc}",'u'],
     ["\x{fd}",'y'],["\x{2011}",'-'],["\x{105}",'a'],["\x{103}",'a'],["\x{102}",'A'],
     ["\x{107}",'c'],["\x{10d}",'c'],["\x{10c}",'C'],["\x{11b}",'e'],["\x{119}",'e'],
     ["\x{142}",'l'],["\x{144}",'n'],["\x{159}",'r'],["\x{158}",'r'],["\x{15b}",'s'],
