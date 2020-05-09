@@ -8,6 +8,7 @@
 #            ...this fails as of 2018 may 6, apparently because of incompatibility between versions of gpg
 #    make post
 #    git: commit and push
+#    git tag x.y.z && git push --tags
 # Updating manpage doesn't work right, for reasons I don't understand. M4 seems to remember
 # the previous version of manpage.txt rather than reading it in afresh. To work around this,
 # need to rename it to something other than manpage.txt, alter the when.source file to refer

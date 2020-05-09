@@ -715,7 +715,9 @@ our %preferences=(
   'editor'=>'emacs -nw',            # editor
   'now'=>'',                        # pretend it's some other day today
   'filter_accents_on_output'=>!($ENV{TERM}=~m/(mlterm|xterm)/),
-                                    # since most Unix terminals show accented Unicode chars as garbage
+                                    # ...since most Unix terminals show accented Unicode chars as garbage.
+                                    # Testing with rxvt 2.7.10 shows that this does seem necessary for rxvt;
+                                    # see https://github.com/bcrowell/when/pull/10 .
   'styled_output'=>1,               # Do they want ANSI styling if the output is a TTY?
   'styled_output_if_not_tty'=>0,    # Do they want ANSI styling if the output isn't a TTY?
   'calendar_today_style'=>'bold',   # ANSI styling for today's date on the calendar.
@@ -867,10 +869,6 @@ our $quotalt_open = "\x{ab}" ;
 our $quotalt_close = "\x{bb}" ;
 our $nonbreaking_hyphen = "\x{2011}" ;
 
-# Portuguese characters:
-our $a_tilde = "\x{e3}";
-our $c_circumflex = "\x{e7}";
-our $e_circumflex = "\x{f5}";
 
 #**********************************************************************
 # When adding a language, make sure to update the list of languages
