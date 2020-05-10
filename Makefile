@@ -9,6 +9,8 @@
 #    make post
 #    git: commit and push
 #    git tag x.y.z && git push --tags
+#    In github, do what's described here: https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository
+#      ... packagers for distros seem to want tags and github releases to make things easier for them
 # Updating manpage doesn't work right, for reasons I don't understand. M4 seems to remember
 # the previous version of manpage.txt rather than reading it in afresh. To work around this,
 # need to rename it to something other than manpage.txt, alter the when.source file to refer
