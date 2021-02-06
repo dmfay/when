@@ -49,7 +49,7 @@ install: when.1
 	install -m 755 temp $(DESTDIR)$(bindir)/when
 	# ... 755=u:rwx,go:rx
 	rm temp
-	gzip -9 <when.1 >when.1.gz
+	gzip -n9 <when.1 >when.1.gz
 	- test -d $(DESTDIR)$(MANDIR) || mkdir -p $(DESTDIR)$(MANDIR)
 	install -m 644 when.1.gz $(DESTDIR)$(MANDIR)
 	rm -f when.1.gz
