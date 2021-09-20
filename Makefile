@@ -79,7 +79,7 @@ clean:
 
 post: when.tar.gz when when.1
 	cp when.tar.gz $(HOME)/Lightandmatter/when
-	make_plain_text_manpage.pl >$(HOME)/Documents/web/source/when/manpage.txt
+	#make_plain_text_manpage.pl >$(HOME)/Documents/web/source/when/manpage.txt
 	# debian stuff fails as of 2018 may 6:
 	#cp when_$(VERSION)-debian-source.tar.gz $(HOME)/Lightandmatter/when
 	#cp when_$(VERSION)-*_all.deb $(HOME)/Lightandmatter/when

@@ -3,7 +3,7 @@
 #----------------------------------------------------------------
 # Version number
 #----------------------------------------------------------------
-our $version = "1.1.40"; 
+our $version = "1.1.41"; 
 
 #----------------------------------------------------------------
 # Short documentation
@@ -448,7 +448,7 @@ or
 
         filter_accents_on_output = 1
 
-in your ~/.when/preferences file. I'd be interested in hearing from
+in your preferences file. I'd be interested in hearing from
 any users who can suggest a better mechanism for this than attempting to
 interpret the $TERM variable.
 
@@ -466,7 +466,16 @@ in your preferences file to set your language, or supply the --language
 option on the command line, but that's not necessary if your $LANG
 environment variable is set correctly.
 
-=head1 FORMAT OF THE PREFERENCES FILE
+=head1 LOCATION AND FORMAT OF THE PREFERENCES FILE
+
+Most people will have their preferences file in ~/.when/preferences.
+Those who prefer to keep their home directory uncluttered with dotfiles
+can use one of the following standard possibilities defined by the XDG standard.
+In decreasing order of priority:
+${WHEN_CONFIG_HOME}/preferences,
+${XDG_CONFIG_HOME}/when/preferences,
+$HOME/.config/when/preferences, and $HOME/.when/preferences.
+
 
 Each line consists of something like this:
 
@@ -630,7 +639,7 @@ accented characters
 B<$HOME>/.when/calendar - The default location for the
 user's calendar (pointed to by the preferences file)
 
-B<$HOME>/.when/preferences - The user's preferences.
+B<$HOME>/.when/preferences - The user's preferences. (See above for alternative locations, which follow the XDG standard.)
 
 =head1 BUGS
 
@@ -1439,8 +1448,20 @@ our %ansi_terminal_styling = (
 #----------------------------------------------------------------
 # Read the preferences file.
 #----------------------------------------------------------------
-my $dir = glob "~/.when";
-my $prefs_file = glob '~/.when/preferences';
+sub find_config_dir() {
+  my @locations = (); # follow XDG standard, https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+  if ($ENV{WHEN_CONFIG_HOME}) { push @locations,$ENV{WHEN_CONFIG_HOME} }
+  if ($ENV{XDG_CONFIG_HOME}) { push @locations,"$ENV{XDG_CONFIG_HOME}/when" }
+  push @locations,glob "~/.config/when";
+  push @locations,glob "~/.when";
+  foreach my $loc(@locations) {
+    if (-d $loc) { return $loc }
+  }
+  return $locations[-1]; # doesn't exist, but it's the typical location, so return it and expect an error
+}
+
+my $dir = find_config_dir();
+my $prefs_file = glob "$dir/preferences";
 our $quickie = 0;
 our $got_command_line_options = 0;
 
