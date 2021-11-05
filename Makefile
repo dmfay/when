@@ -1,6 +1,5 @@
 # making a new version:
 #    change version number near top of program
-#    [doesn't work: change version number in *TWO PLACES* in /home/bcrowell/Documents/web/source/when/when.source]
 #    Update version numbers on web page (no longer made from .source file).
 #    make install (so make test will run the right version)
 #    make test

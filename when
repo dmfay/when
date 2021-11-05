@@ -3,7 +3,7 @@
 #----------------------------------------------------------------
 # Version number
 #----------------------------------------------------------------
-our $version = "1.1.41"; 
+our $version = "1.1.42"; 
 
 #----------------------------------------------------------------
 # Short documentation
@@ -1700,7 +1700,7 @@ foreach my $cmd(@do_what) {
     do_output(describe_date()."\n");
   }
   if ($cmd eq 'normal') {
-    normal_behavior($now,$want_styling);
+    if (normal_behavior($now,$want_styling)!=0) {exit(-1)};
   }
   if ($cmd eq 'calendar') {
     calendar(NOW=>$now,WANT_STYLING=>$want_styling,TODAY_STYLE=>$preferences{'calendar_today_style'},PAST=>$preferences{'past'},FUTURE=>$preferences{'future'});
@@ -1731,6 +1731,11 @@ sub describe_date {
 sub do_output {
   my $x = shift;
   print filter_accents_if_desired($x);
+}
+
+sub do_output_to_stderr {
+  my $x = shift;
+  print STDERR filter_accents_if_desired($x);
 }
 
 sub filter_accents_if_desired {
@@ -1818,16 +1823,16 @@ sub normal_behavior {
           $match = DateMatch->new('exact',$date);
           if ($match->{ERR} ne '') {
             my $err = $match->{ERR};
-            do_output("****** $err\n******  $line\n\n");
-            return;
+            do_output_to_stderr("****** $err\n******  $line\n\n");
+            return -1;
           }
         }
         else {
           $match = DateMatch->new('condition',$date);
           if ($match->{ERR}) {
             my $err = $match->{ERR};
-            do_output("****** $err\n******  $line\n\n");
-            return;
+            do_output_to_stderr("****** $err\n******  $line\n\n");
+            return -1;
           }
         }
         if ($match->{TYPE} eq 'condition') {
@@ -1930,6 +1935,7 @@ sub normal_behavior {
     }
   }
   if (!$did_it) {print $complete_output}
+  return 0;
 }
 
 #----------------------------------------------------------------
