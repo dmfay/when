@@ -482,7 +482,8 @@ Each line consists of something like this:
         variable = value
 
 Whitespace is ignored everywhere except inside the value. Variable names
-are case-insensitive. Blank lines are ignored.
+are case-insensitive. Blank lines are ignored. Comments are allowed, prefaced
+by #.
 
 =head1 MORE EXAMPLES
 
@@ -1509,11 +1510,13 @@ if (-e $prefs_file) {
     if ($line =~ m/^\s*(\w+)\s*\=\s*([^\s].*)*/) {
       my ($option,$value) = ($1,$2);
       $value =~ s/\s+$//; # strip trailing blanks
+      $value =~ s/#.*$//; # strip comment marked by #
       $preferences{lc($option)} = $value;
       if (lc($option) eq 'future') {$explicitly_set_future=1}
     }
     else {
-      if (!($line =~ m/^\s*$/)) {die w('syntax_err_in_prefs',$prefs_file,$line)}
+      if (!($line =~ m/^\s*(#.*)?$/)) {die w('syntax_err_in_prefs',$prefs_file,$line)}
+      # The (#.*)? is to allow lines consisting of only a comment prefaced by #.
     }
   }
   close FILE;
