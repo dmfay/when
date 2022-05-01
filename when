@@ -1509,8 +1509,8 @@ if (-e $prefs_file) {
   while (my $line = <FILE>) {
     if ($line =~ m/^\s*(\w+)\s*\=\s*([^\s].*)*/) {
       my ($option,$value) = ($1,$2);
-      $value =~ s/\s+$//; # strip trailing blanks
       $value =~ s/#.*$//; # strip comment marked by #
+      $value =~ s/\s+$//; # strip trailing blanks
       $preferences{lc($option)} = $value;
       if (lc($option) eq 'future') {$explicitly_set_future=1}
     }
