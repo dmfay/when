@@ -236,6 +236,11 @@ Pipe the calendar file through a program before reading it. Default: ""
 
 Pretend today is some other date.
 
+=item --[no]items_with_date
+
+Whether to include the date in each item row in the items (i) and related commands,
+normally [day] [date] [text]. Default: yes
+
 =item --[no]neighboring_months
 
 The default behavior of "when c" is to print out calendars for
@@ -732,6 +737,7 @@ our %preferences=(
   'styled_output_if_not_tty'=>0,    # Do they want ANSI styling if the output isn't a TTY?
   'calendar_today_style'=>'bold',   # ANSI styling for today's date on the calendar.
   'items_today_style'=>'bold',      # ANSI styling for today's items on the calendar.
+  'items_with_date'=>1,             # item description length can be long (includes date) or short
   'prefilter'=>'',                  # pipe calendar file through this program before feeding it to When
   'monday_first'=>0,                # display Monday rather than Sunday as the first day of the week?
   'orthodox_easter'=>0,             # use Orthodox Eastern Church's date for easter?
@@ -773,6 +779,7 @@ our %command_line_options = (
   'now=s'=>\$preferences{'now'},
   'calendar_today_style=s'=>\$preferences{'calendar_today_style'},
   'items_today_style=s'=>\$preferences{'items_today_style'},
+  'items_with_date!'=>\$preferences{'items_with_date'},
   'prefilter=s'=>\$preferences{'prefilter'},
   'filter_accents_on_output!'=>\$preferences{'filter_accents_on_output'},
   'styled_output!'=>\$preferences{'styled_output'},
@@ -1809,7 +1816,13 @@ sub normal_behavior {
     if ($delta == 1) {$describe = w('tomorrow')}
     $describe = filter_accents_if_desired($describe);
     $describe = AnsiTerminalStyling::pad_to_desired_length($describe,$max_wday_length+1,' ');
-    my $say = sprintf "%s %s %s\n",$describe,$when->string_human,$what;
+    my $say;
+    if ($preferences{items_with_date} eq 0) {
+       $say = sprintf "%s %s\n",$describe,$what;
+    }
+    else {
+       $say = sprintf "%s %s %s\n",$describe,$when->string_human,$what;
+    }
     push @show,[$when->clone,$say,$what];
   };
   foreach my $line(@lines) {
@@ -1917,7 +1930,7 @@ sub normal_behavior {
   }
   my $rows = $preferences{'rows'};
   if ($rows==0) {$rows=9999}
-  my $margin = $max_wday_length+14; # This is the width of the column containing the date.
+  my $margin = $max_wday_length+2+(12 * $preferences{'items_with_date'}); # 2 for column padding, then width of date column if applicable
   if ($wrap<$margin+10) {$wrap=$margin+10} # otherwise you get an endless loop
   foreach my $thing(@show) {
     my ($when,$say) = @$thing;
